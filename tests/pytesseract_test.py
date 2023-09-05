@@ -379,18 +379,21 @@ def test_wrong_prepare_type(obj):
 )
 def test_wrong_tesseract_cmd(monkeypatch, test_file, test_path):
     """Test wrong or missing tesseract command."""
-    import pytesseract
+    import unstructured_pytesseract
 
-    monkeypatch.setattr('pytesseract.pytesseract.tesseract_cmd', test_path)
-
-    with pytest.raises(TesseractNotFoundError):
-        pytesseract.get_languages.__wrapped__()
-
-    with pytest.raises(TesseractNotFoundError):
-        pytesseract.get_tesseract_version.__wrapped__()
+    monkeypatch.setattr(
+        'unstructured_pytesseract.pytesseract.tesseract_cmd',
+        test_path,
+    )
 
     with pytest.raises(TesseractNotFoundError):
-        pytesseract.image_to_string(test_file)
+        unstructured_pytesseract.get_languages.__wrapped__()
+
+    with pytest.raises(TesseractNotFoundError):
+        unstructured_pytesseract.get_tesseract_version.__wrapped__()
+
+    with pytest.raises(TesseractNotFoundError):
+        unstructured_pytesseract.image_to_string(test_file)
 
 
 def test_main_not_found_cases(
@@ -400,10 +403,10 @@ def test_main_not_found_cases(
     test_invalid_file,
 ):
     """Test wrong or missing tesseract command in main."""
-    import pytesseract
+    import unstructured_pytesseract
 
     monkeypatch.setattr('sys.argv', ['', test_invalid_file])
-    assert pytesseract.pytesseract.main() == 1
+    assert unstructured_pytesseract.pytesseract.main() == 1
     captured = capsys.readouterr()
     assert (
         'No such file or directory' in captured.err
@@ -411,18 +414,18 @@ def test_main_not_found_cases(
     )
 
     monkeypatch.setattr(
-        'pytesseract.pytesseract.tesseract_cmd',
+        'unstructured_pytesseract.pytesseract.tesseract_cmd',
         'wrong_tesseract',
     )
     monkeypatch.setattr('sys.argv', ['', test_file])
-    assert pytesseract.pytesseract.main() == 1
+    assert unstructured_pytesseract.pytesseract.main() == 1
     assert (
         "wrong_tesseract is not installed or it's not in your PATH. "
         'See README file for more information.' in capsys.readouterr().err
     )
 
     monkeypatch.setattr('sys.argv', [''])
-    assert pytesseract.pytesseract.main() == 2
+    assert unstructured_pytesseract.pytesseract.main() == 2
     assert 'Usage: pytesseract [-l lang] input_file' in capsys.readouterr().err
 
 
@@ -433,17 +436,17 @@ def test_main_not_found_cases(
 )
 def test_proper_oserror_exception_handling(monkeypatch, test_file, test_path):
     """ "Test for bubbling up OSError exceptions."""
-    import pytesseract
+    import unstructured_pytesseract
 
     monkeypatch.setattr(
-        'pytesseract.pytesseract.tesseract_cmd',
+        'unstructured_pytesseract.pytesseract.tesseract_cmd',
         test_path,
     )
 
     with pytest.raises(
         TesseractNotFoundError if IS_PYTHON_2 and test_path else OSError,
     ):
-        pytesseract.image_to_string(test_file)
+        unstructured_pytesseract.image_to_string(test_file)
 
 
 DEFAULT_LANGUAGES = ('fra', 'eng', 'osd')
