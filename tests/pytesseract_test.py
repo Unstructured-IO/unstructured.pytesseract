@@ -11,23 +11,23 @@ from unittest import mock
 
 import pytest
 
-from pytesseract import ALTONotSupported
-from pytesseract import get_languages
-from pytesseract import get_tesseract_version
-from pytesseract import image_to_alto_xml
-from pytesseract import image_to_boxes
-from pytesseract import image_to_data
-from pytesseract import image_to_osd
-from pytesseract import image_to_pdf_or_hocr
-from pytesseract import image_to_string
-from pytesseract import Output
-from pytesseract import run_and_get_multiple_output
-from pytesseract import TesseractNotFoundError
-from pytesseract import TSVNotSupported
-from pytesseract.pytesseract import file_to_dict
-from pytesseract.pytesseract import numpy_installed
-from pytesseract.pytesseract import pandas_installed
-from pytesseract.pytesseract import prepare
+from unstructured_pytesseract import ALTONotSupported
+from unstructured_pytesseract import get_languages
+from unstructured_pytesseract import get_tesseract_version
+from unstructured_pytesseract import image_to_alto_xml
+from unstructured_pytesseract import image_to_boxes
+from unstructured_pytesseract import image_to_data
+from unstructured_pytesseract import image_to_osd
+from unstructured_pytesseract import image_to_pdf_or_hocr
+from unstructured_pytesseract import image_to_string
+from unstructured_pytesseract import Output
+from unstructured_pytesseract import run_and_get_multiple_output
+from unstructured_pytesseract import TesseractNotFoundError
+from unstructured_pytesseract import TSVNotSupported
+from unstructured_pytesseract.pytesseract import file_to_dict
+from unstructured_pytesseract.pytesseract import numpy_installed
+from unstructured_pytesseract.pytesseract import pandas_installed
+from unstructured_pytesseract.pytesseract import prepare
 
 if numpy_installed:
     import numpy as np
