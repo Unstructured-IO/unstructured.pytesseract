@@ -52,4 +52,4 @@ jobs:
           TOX_TESTENV_PASSENV: PY_COLORS
 
       - name: Test pytesseract package installation
-        run: pip install -U git+${{ github.server_url }}/${{ github.repository }} && pip show pytesseract && python -c 'import pytesseract'
+        run: pip install -U git+${{ github.server_url }}/${{ github.repository }} && pip show unstructured_pytesseract && python -c 'import unstructured_pytesseract'
