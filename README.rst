@@ -157,6 +157,8 @@ Add the following config, if you have tessdata error like: "Error opening data f
 
 * **run_and_get_output** Returns the raw output from Tesseract OCR. Gives a bit more control over the parameters that are sent to tesseract.
 
+* **run_and_get_multiple_output** Returns like `run_and_get_output` but can handle multiple extensions. This function replaces the `extension: str` kwarg with `extension: List[str]` kwarg where a list of extensions can be specified and the corresponding data is returned after only one `tesseract` call. This function reduces the number of calls to `tesseract` when multiple output formats, like both text and bounding boxes,  are needed.
+
 **Parameters**
 
 ``image_to_data(image, lang=None, config='', nice=0, output_type=Output.STRING, timeout=0, pandas_config=None)``
@@ -245,12 +247,4 @@ As of Python-tesseract 0.3.1 the license is Apache License Version 2.0
 CONTRIBUTORS
 ------------
 - Originally written by `Samuel Hoffstaetter <https://github.com/h>`_
-- `Juarez Bochi <https://github.com/jbochi>`_
-- `Matthias Lee <https://github.com/madmaze>`_
-- `Lars Kistner <https://github.com/Sr4l>`_
-- `Ryan Mitchell <https://github.com/REMitchell>`_
-- `Emilio Cecchini <https://github.com/ceccoemi>`_
-- `John Hagen <https://github.com/johnthagen>`_
-- `Darius Morawiec <https://github.com/nok>`_
-- `Eddie Bedada <https://github.com/adbedada>`_
-- `Uğurcan Akyüz <https://github.com/ugurcanakyuz>`_
+- `Full list of contributors <https://github.com/madmaze/pytesseract/graphs/contributors>`_
