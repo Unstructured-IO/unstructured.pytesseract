@@ -267,6 +267,24 @@ def test_run_and_get_multiple_output(test_file, function_mapping, extensions):
             assert result == function_mapping[extension](test_file)
 
 
+def test_run_and_get_multiple_output_with_extra_config(
+    test_file,
+    function_mapping,
+):
+    compound_results = run_and_get_multiple_output(
+        test_file,
+        extensions=['hocr', 'txt'],
+        extra_config='hocr_char_boxes=1',
+    )
+    assert (
+        compound_results[0][:1000]
+        == function_mapping['hocr'](test_file, config='-c hocr_char_boxes=1')[
+            :1000
+        ]
+    )
+    assert compound_results[1] == function_mapping['txt'](test_file)
+
+
 @pytest.mark.skipif(
     TESSERACT_VERSION[:2] < (4, 1),
     reason='requires tesseract >= 4.1',

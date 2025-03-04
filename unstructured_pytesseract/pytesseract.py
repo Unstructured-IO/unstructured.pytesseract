@@ -297,15 +297,16 @@ def run_and_get_multiple_output(
     lang: Optional[str] = None,
     nice: int = 0,
     timeout: int = 0,
+    extra_config: str = '',
     return_bytes: bool = False,
 ):
     config = ' '.join(
         EXTENTION_TO_CONFIG.get(extension, '') for extension in extensions
     ).strip()
     if config:
-        config = f'-c {config}'
+        config = f'-c {config} {extra_config}'
     else:
-        config = ''
+        config = extra_config
 
     with save(image) as (temp_name, input_filename):
         kwargs = {
